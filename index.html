@@ -93,7 +93,7 @@
             
               <li class="archive-list-container">
                 <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">7</span></li></ul>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">10</span></li></ul>
               </li>
             
           
@@ -142,6 +142,154 @@
 
     <div class="post-list-item article">
       <h3 class="article-header">
+        <a href="/2018/12/06/JQ遍历数据，并放到页面上/" >
+  JQ遍历数据，并放到页面上
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/12/06/JQ遍历数据，并放到页面上/"><span class="article-date">
+  2018-12-06
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"><a href="#JQ遍历从后台获取的数据，并且在js中组合，放进页面中" class="headerlink" title="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"></a>JQ遍历从后台获取的数据，并且在js中组合，放进页面中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 显示店铺</span><br><span class="line">   shopList:<span class="keyword">function</span>(data)  &#123;</span><br><span class="line">       var content = <span class="string">'&lt;option value="all"&gt;全部&lt;/option&gt;'</span>;</span><br><span class="line">       <span class="keyword">for</span> (var i <span class="keyword">in</span> data) &#123;</span><br><span class="line">           content += <span class="string">'&lt;option value="'</span>+data[i].shop_id+<span class="string">'"&gt;'</span>+data[i].shop_name+<span class="string">'&lt;/option&gt;'</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       // 添加到页面中</span><br><span class="line">       $(<span class="string">'#shopList'</span>).html(content);</span><br><span class="line">       // ($(<span class="string">'#shopList option:selected'</span>))</span><br><span class="line">       <span class="keyword">if</span>($.cookie(<span class="string">'shopListcookie'</span>) != undefined)&#123;</span><br><span class="line">		$(<span class="string">'#shopList'</span>).val($.cookie(<span class="string">'shopListcookie'</span>))</span><br><span class="line">	&#125;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/01/08/JQ中的extend函数/" >
+  JQ中的extend函数
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/01/08/JQ中的extend函数/"><span class="article-date">
+  2018-01-08
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="extend对象合并"><a href="#extend对象合并" class="headerlink" title="extend对象合并"></a>extend对象合并</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Jquery的扩展方法extend是我们在写插件的过程中常用的方法，该方法有一些重载原型</span><br><span class="line">// 它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。</span><br><span class="line">// 如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：</span><br><span class="line">// var newSrc=$.extend(&#123;&#125;,src1,src2,src3...)</span><br><span class="line">// 也就是将<span class="string">"&#123;&#125;"</span>作为dest参数。这样就可以将src1,src2,src3...进行合并，然后将合并结果返回给newSrc了。</span><br><span class="line">// 如下例：var result=$.extend(&#123;&#125;,&#123;name:<span class="string">"Tom"</span>,age:21&#125;,&#123;name:<span class="string">"Jerry"</span>,sex:<span class="string">"Boy"</span>&#125;)</span><br><span class="line">// 那么合并后的结果result=&#123;name:<span class="string">"Jerry"</span>,age:21,sex:<span class="string">"Boy"</span>&#125;</span><br><span class="line">// 也就是说后面的参数如果和前面的参数存在相同的名称，那么后面的会覆盖前面的参数值。</span><br><span class="line"></span><br><span class="line">var dataAjax = $.extend(&#123;&#125;, page, data);</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2018/01/02/JQ中用on绑定bug“/" >
+  在使用JQ中用on来绑定，有时会触发两遍点击事件
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2018/01/02/JQ中用on绑定bug“/"><span class="article-date">
+  2018-01-02
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="1、先解绑之后再绑定"><a href="#1、先解绑之后再绑定" class="headerlink" title="1、先解绑之后再绑定"></a>1、先解绑之后再绑定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.right'</span>).off(<span class="string">'click'</span>,<span class="string">'.tabDel'</span>).on(<span class="string">'click'</span>,<span class="string">'.tabDel'</span>,<span class="function"><span class="title">function</span></span>()&#123;&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="2、查看是否冒泡，阻止冒泡"><a href="#2、查看是否冒泡，阻止冒泡" class="headerlink" title="2、查看是否冒泡，阻止冒泡"></a>2、查看是否冒泡，阻止冒泡</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.right'</span>).on(<span class="string">'click'</span>,<span class="string">'.tabDel'</span>,<span class="function"><span class="title">function</span></span>()&#123;......<span class="built_in">return</span> <span class="literal">false</span>;&#125;);</span><br><span class="line">   event.stopPropagation()  //会阻止事件往上冒泡，但是并不阻止事件本身；</span><br><span class="line">   <span class="built_in">return</span> <span class="literal">false</span>             //则是既阻止了事件往上冒泡又阻止了事件本身。</span><br></pre></td></tr></table></figure>
+<h3 id="3、先用on绑定之后再用unbind解绑"><a href="#3、先用on绑定之后再用unbind解绑" class="headerlink" title="3、先用on绑定之后再用unbind解绑"></a>3、先用on绑定之后再用unbind解绑</h3><pre><code class="bash">$(<span class="string">'.right'</span>).on(<span class="string">'click'</span>,<span class="string">'.tabDel'</span>,<span class="function"><span class="title">function</span></span>(){......});
+$(<span class="string">'.right .tabDel'</span>).unbind(<span class="string">'click'</span>);
+</code></pre>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/12/16/JQ获得指定元素/" >
+  JQ获得指定元素
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/12/16/JQ获得指定元素/"><span class="article-date">
+  2017-12-16
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="比如获得name为…的input元素"><a href="#比如获得name为…的input元素" class="headerlink" title="比如获得name为…的input元素"></a>比如获得name为…的input元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 判断菜品库门店添加价格策略中的选择框</span><br><span class="line">	$(<span class="string">'input[name="pricedate"]'</span>).each(<span class="function"><span class="title">function</span></span>()&#123;		    		</span><br><span class="line">		$(this).unbind(<span class="string">'click'</span>).<span class="built_in">bind</span>(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">			clickradio($(this).val(),$(<span class="string">'.second-width'</span>));    	</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
         <a href="/2017/08/11/Angular-controller/" >
   Angular中父controller与子controller之间的传递
 </a>
@@ -182,7 +330,7 @@
     <div class="post-list-item article">
       <h3 class="article-header">
         <a href="/2017/08/11/Angular-Ajax/" >
-  angular中的请求以及错误的提示
+  Angular中的请求以及错误的提示
 </a>
 
       </h3>
@@ -294,6 +442,43 @@
 
     <div class="post-list-item article">
       <h3 class="article-header">
+        <a href="/2017/06/23/Angular中的接口函数/" >
+  Angular中的接口函数
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/06/23/Angular中的接口函数/"><span class="article-date">
+  2017-06-23
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="函数调用内容："><a href="#函数调用内容：" class="headerlink" title="函数调用内容："></a>函数调用内容：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/获取波特率</span><br><span class="line"><span class="variable">$scope</span>.baudRates = <span class="variable">$scope</span>.getmethod(<span class="string">"/da-devices/com/baud-rates"</span>);</span><br><span class="line"><span class="variable">$scope</span>.comData.baudRate = <span class="variable">$scope</span>.baudRates[0];</span><br><span class="line">//获取串口名称</span><br><span class="line"><span class="variable">$scope</span>.com_ports = <span class="variable">$scope</span>.getmethod(<span class="string">"/da-devices/com/com-ports"</span>);</span><br><span class="line"><span class="variable">$scope</span>.comData.comPort = <span class="variable">$scope</span>.com_ports[0];</span><br></pre></td></tr></table></figure>
+<h3 id="接口函数："><a href="#接口函数：" class="headerlink" title="接口函数："></a>接口函数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$scope</span>.getmethod = <span class="keyword">function</span>(methodurl)&#123;</span><br><span class="line">  	var tmpdata = [];</span><br><span class="line">  	$.ajax(&#123;</span><br><span class="line">      	method: <span class="string">"GET"</span>,</span><br><span class="line">      	url:url+methodurl,</span><br><span class="line">      	async: <span class="literal">false</span>,</span><br><span class="line">      	headers:header</span><br><span class="line">  	&#125;)</span><br><span class="line">  	.success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">  		tmpdata =  data.entity;</span><br><span class="line">  	&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">  		alert(data.message);</span><br><span class="line">  	&#125;)   	</span><br><span class="line">  	<span class="built_in">return</span> tmpdata;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
         <a href="/2017/06/11/Angular中的路由传参/" >
   Angular中的路由传参
 </a>
@@ -324,86 +509,11 @@
     </div>
   
 
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2017/03/11/你好，Hexo/" >
-  你好，Hexo
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2017/03/11/你好，Hexo/"><span class="article-date">
-  2017-03-11
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
-
-  
-  
-    <div class="post-list">
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2017/03/11/hello-world/" >
-  Hello World
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2017/03/11/hello-world/"><span class="article-date">
-  2017-03-11
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
-      </div>
-    </div>
-
-  
-    </div>
-  
 
 
+  <div class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+  </div>
 
 
 
