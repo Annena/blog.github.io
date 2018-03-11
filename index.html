@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Lina&#39;s blog
+  
+</title>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lina&#39;s blog">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Lina&#39;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lina&#39;s blog">
+
+
+  <link rel="alternative" href="/atom.xml" title="Lina&#39;s blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Lina&#39;s blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Lina&#39;s blog</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Lina</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">7</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/Annena/Annena.github.io" title="Annena" target="_blank" rel="noopener">Annena</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/Annena" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/08/11/Angular-controller/" >
+  Angular中父controller与子controller之间的传递
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/08/11/Angular-controller/"><span class="article-date">
+  2017-08-11
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p>不同controller里面父级与子级之前的值传递，因为broadcast是广播，所以所有的子级路由都能接收到；<br>但是emit是冒泡，因为只有一个父级。</p>
+<h3 id="父级与子级之间的创建"><a href="#父级与子级之间的创建" class="headerlink" title="父级与子级之间的创建"></a>父级与子级之间的创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller = <span class="string">"parent"</span>&gt;		  //父级</span><br><span class="line">	&lt;div ng-controller = <span class="string">'childOne'</span>&gt;  //本身</span><br><span class="line">		&lt;a ng-click = getCont()&gt;Click me&lt;/a&gt;</span><br><span class="line">		&lt;div ng-controller = <span class="string">'grandson'</span>&gt;&lt;/div&gt; //本身的子级</span><br><span class="line">	&lt;/div&gt; </span><br><span class="line">	&lt;div ng-controller = <span class="string">'childTwo'</span>&gt;&lt;/div&gt;	//本身的兄弟</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="发送值"><a href="#发送值" class="headerlink" title="发送值"></a>发送值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">familyControllers.controller(<span class="string">'childOne'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.click = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$broadcast</span>(<span class="string">'to-child'</span>,<span class="string">'child'</span>);   //向本身的子级发送</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$emit</span>(<span class="string">'to-parent'</span>,<span class="string">'parent'</span>);      //向本身的父级发送</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="获得值"><a href="#获得值" class="headerlink" title="获得值"></a>获得值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### 父级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'parent'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//可以获得成功 为‘parent’</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">#### 子级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'grandson'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//可以获得成功 为‘child’</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">#### 平级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'childTwo'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//平级得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//平级得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/08/11/Angular-Ajax/" >
+  angular中的请求以及错误的提示
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/08/11/Angular-Ajax/"><span class="article-date">
+  2017-08-11
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="第一种-Angular中的-http-http无法设置为同步-："><a href="#第一种-Angular中的-http-http无法设置为同步-：" class="headerlink" title="第一种(Angular中的$http,$http无法设置为同步)："></a>第一种(Angular中的$http,$http无法设置为同步)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$http</span>(&#123;method:<span class="string">"put"</span>,</span><br><span class="line">			url:url + <span class="string">"/workgroups"</span>,</span><br><span class="line">			contentType: <span class="string">"application/json"</span>,</span><br><span class="line">			dataType:<span class="string">"JSON"</span>,</span><br><span class="line">                headers:&#123;<span class="string">'appId'</span>:<span class="string">'001'</span>&#125;,</span><br><span class="line">                        data:JSON.stringify(data),</span><br><span class="line">                        async: <span class="literal">false</span>&#125;)</span><br><span class="line">	    .success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">	          alert(<span class="string">"修改成功!"</span>)</span><br><span class="line">	          <span class="variable">$state</span>.go(<span class="string">"app.workgroup.workgroup"</span>);</span><br><span class="line">		&#125;)</span><br><span class="line">	    .error(<span class="keyword">function</span>(data,e,dx)&#123;</span><br><span class="line">	        alert(dx(<span class="string">"X-configApp-error"</span>));</span><br><span class="line">	        <span class="built_in">return</span>;</span><br><span class="line">	    &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="第二种-Angular中的-http直接加get-："><a href="#第二种-Angular中的-http直接加get-：" class="headerlink" title="第二种(Angular中的$http直接加get)："></a>第二种(Angular中的$http直接加get)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####一般用于只请求数据、或者删除需要向后台传的东西很少时使用</span></span><br><span class="line"><span class="variable">$http</span>.get(url+<span class="string">"/monitor-points?page="</span>+(page - 1)+<span class="string">"&amp;size="</span>+pageSize+urlData).success(<span class="keyword">function</span> (largeLoad,status,dx) &#123;</span><br><span class="line">                	<span class="variable">$scope</span>.totalServerItems = dx(<span class="string">"X-Total-Count"</span>);//返回记录的总数</span><br><span class="line">                    data = largeLoad.filter(<span class="keyword">function</span>(item) &#123;</span><br><span class="line">                        <span class="built_in">return</span> JSON.stringify(item).toLowerCase().indexOf(ft) != -1;</span><br><span class="line">                    &#125;);</span><br><span class="line">                    <span class="variable">$scope</span>.setPagingData(data,page,pageSize);</span><br><span class="line">                &#125;);</span><br><span class="line"><span class="variable">$http</span>.delete(url+<span class="string">"/monitor-points/"</span>+row.entity.id,)</span><br><span class="line">        	.success(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        		alert(<span class="string">"删除成功！"</span>);</span><br><span class="line">        		<span class="variable">$state</span>.go(<span class="string">"app.point.point"</span>,&#123;&#125;,&#123;reload:<span class="literal">true</span>&#125;);</span><br><span class="line">        	&#125;) </span><br><span class="line">        	.error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">        	 alert(data.message);</span><br><span class="line">        	&#125;);</span><br><span class="line">        var header = &#123;<span class="string">'appId'</span>:<span class="string">'001'</span>&#125;;</span><br><span class="line">		<span class="variable">$http</span>.get(url+<span class="string">"/monitor-points/"</span>+modify_id,&#123;headers:header&#125;)</span><br><span class="line">		.success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">			//默认选中传过来的值</span><br><span class="line">			<span class="variable">$scope</span>.point = data.entity.monitorPoint;</span><br><span class="line">			<span class="variable">$scope</span>.attrs=data.entity.attrs;</span><br><span class="line">			<span class="variable">$scope</span>.setWorkGroupById(<span class="variable">$scope</span>.point.workgroupId);</span><br><span class="line">			<span class="variable">$scope</span>.setGateWayById(<span class="variable">$scope</span>.point.gatewayId);</span><br><span class="line">//			console.log(data.gatewayTypeId);</span><br><span class="line">		&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">           alert(data.message);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="第三种-JQ的Ajax-："><a href="#第三种-JQ的Ajax-：" class="headerlink" title="第三种(JQ的Ajax)："></a>第三种(JQ的Ajax)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">        		url:url + <span class="string">"/da-devices"</span>,</span><br><span class="line">        		<span class="built_in">type</span>:<span class="string">"POST"</span>,</span><br><span class="line">        		data:JSON.stringify(data),</span><br><span class="line">        		contentType:<span class="string">"application/json"</span>,</span><br><span class="line">        		async: <span class="literal">false</span></span><br><span class="line">        	&#125;).success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">        		alert(<span class="string">"创建成功！！！！"</span>);</span><br><span class="line">        	&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    			url:url+<span class="string">'/da-devices'</span>,</span><br><span class="line">    			<span class="built_in">type</span>:<span class="string">"PUT"</span>,</span><br><span class="line">    			data:JSON.stringify(<span class="variable">$scope</span>.tcpData),</span><br><span class="line">    			contentType:<span class="string">'application/json'</span>,</span><br><span class="line">    			async:<span class="literal">false</span></span><br><span class="line">    		&#125;).success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">    			alert(<span class="string">'修改成功!!!!'</span>);</span><br><span class="line">    			<span class="variable">$state</span>.go(<span class="string">'app.point.view.collector.list'</span>);</span><br><span class="line">    		&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/08/07/Angular中服务factory的使用/" >
+  Angular中服务factory的使用
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/08/07/Angular中服务factory的使用/"><span class="article-date">
+  2017-08-07
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="路由定义："><a href="#路由定义：" class="headerlink" title="路由定义："></a>路由定义：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//上报策略修改</span><br><span class="line">  .state(<span class="string">'app.point.report.modify'</span>,&#123;</span><br><span class="line">	  url:<span class="string">'/modify'</span>,</span><br><span class="line">	  params:&#123;id:null&#125;,</span><br><span class="line">	  templateUrl:<span class="string">'tpl/point.report.modify.html'</span>,</span><br><span class="line">	  resolve:&#123;</span><br><span class="line">		  deps:[<span class="string">'$ocLazyLoad'</span>,</span><br><span class="line">		        <span class="keyword">function</span>(<span class="variable">$ocLazyLoad</span>)&#123;</span><br><span class="line">			  		<span class="built_in">return</span> <span class="variable">$ocLazyLoad</span>.load(<span class="string">'js/controllers/point.report.modify.js'</span>);</span><br><span class="line">		  			&#125;</span><br><span class="line">		        ]</span><br><span class="line">	  &#125;</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="传递参数："><a href="#传递参数：" class="headerlink" title="传递参数："></a>传递参数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$scope</span>.ok = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">  	<span class="variable">$state</span>.go(<span class="string">'app.point.report.modify'</span>,&#123;id:id&#125;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接收参数："><a href="#接收参数：" class="headerlink" title="接收参数："></a>接收参数：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$scope</span>.id = <span class="variable">$stateParams</span>.id;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/08/05/IP与Mac的正则/" >
+  IP与Mac的正则
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/08/05/IP与Mac的正则/"><span class="article-date">
+  2017-08-05
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="IP的正则："><a href="#IP的正则：" class="headerlink" title="IP的正则："></a>IP的正则：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的IP地址</span><br><span class="line"><span class="variable">$scope</span>.gatewayIp = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.ip))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.ip === undefined || <span class="variable">$scope</span>.gateway.ip === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="第二种-Angular中的-http直接加get-："><a href="#第二种-Angular中的-http直接加get-：" class="headerlink" title="第二种(Angular中的$http直接加get)："></a>第二种(Angular中的$http直接加get)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的Mac地址	</span><br><span class="line"><span class="variable">$scope</span>.getewayMac = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^([0-9a-fA-F]&#123;2&#125;)(([/\s:-][0-9a-fA-F]&#123;2&#125;)&#123;5&#125;)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.mac))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.mac === undefined || <span class="variable">$scope</span>.gateway.mac === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/06/11/Angular中的路由传参/" >
+  Angular中的路由传参
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/06/11/Angular中的路由传参/"><span class="article-date">
+  2017-06-11
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="IP的正则："><a href="#IP的正则：" class="headerlink" title="IP的正则："></a>IP的正则：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的IP地址</span><br><span class="line"><span class="variable">$scope</span>.gatewayIp = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.ip))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.ip === undefined || <span class="variable">$scope</span>.gateway.ip === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="第二种-Angular中的-http直接加get-："><a href="#第二种-Angular中的-http直接加get-：" class="headerlink" title="第二种(Angular中的$http直接加get)："></a>第二种(Angular中的$http直接加get)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的Mac地址	</span><br><span class="line"><span class="variable">$scope</span>.getewayMac = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^([0-9a-fA-F]&#123;2&#125;)(([/\s:-][0-9a-fA-F]&#123;2&#125;)&#123;5&#125;)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.mac))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.mac === undefined || <span class="variable">$scope</span>.gateway.mac === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/03/11/你好，Hexo/" >
+  你好，Hexo
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/03/11/你好，Hexo/"><span class="article-date">
+  2017-03-11
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+  
+  
+    <div class="post-list">
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/03/11/hello-world/" >
+  Hello World
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/03/11/hello-world/"><span class="article-date">
+  2017-03-11
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+        
+      </div>
+    </div>
+
+  
+    </div>
+  
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Lina&#39;s blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/Annena" target="_blank">Annena</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>

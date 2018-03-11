@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<title>
+  
+    Angular中父controller与子controller之间的传递
+  
+</title>
+
+<meta name="description" content="不同controller里面父级与子级之前的值传递，因为broadcast是广播，所以所有的子级路由都能接收到；但是emit是冒泡，因为只有一个父级。 父级与子级之间的创建1234567&amp;lt;div ng-controller = &quot;parent&quot;&amp;gt;		  //父级	&amp;lt;div ng-controller = &apos;childOne&apos;&amp;gt;  //本身		&amp;lt;a ng-click =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular中父controller与子controller之间的传递">
+<meta property="og:url" content="http://yoursite.com/2017/08/11/Angular-controller/index.html">
+<meta property="og:site_name" content="Lina&#39;s blog">
+<meta property="og:description" content="不同controller里面父级与子级之前的值传递，因为broadcast是广播，所以所有的子级路由都能接收到；但是emit是冒泡，因为只有一个父级。 父级与子级之间的创建1234567&amp;lt;div ng-controller = &quot;parent&quot;&amp;gt;		  //父级	&amp;lt;div ng-controller = &apos;childOne&apos;&amp;gt;  //本身		&amp;lt;a ng-click =">
+<meta property="og:updated_time" content="2018-03-11T07:41:20.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular中父controller与子controller之间的传递">
+<meta name="twitter:description" content="不同controller里面父级与子级之前的值传递，因为broadcast是广播，所以所有的子级路由都能接收到；但是emit是冒泡，因为只有一个父级。 父级与子级之间的创建1234567&amp;lt;div ng-controller = &quot;parent&quot;&amp;gt;		  //父级	&amp;lt;div ng-controller = &apos;childOne&apos;&amp;gt;  //本身		&amp;lt;a ng-click =">
+
+
+  <link rel="alternative" href="/atom.xml" title="Lina&#39;s blog" type="application/atom+xml">
+
+
+
+  <link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="/perfect-scrollbar/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="/styles/main.css">
+
+
+
+
+
+
+</head>
+<body
+  
+    class="monochrome"
+  
+  >
+  <div class="mobile-header">
+  <button class="sidebar-toggle" type="button">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="title" href="/">Lina&#39;s blog</a>
+</div>
+
+  <div class="main-container">
+    <div class="sidebar">
+  <div class="header">
+    <h1 class="title"><a href="/">Lina&#39;s blog</a></h1>
+    
+    <div class="info">
+      <div class="content">
+        
+        
+          <div class="author">Lina</div>
+        
+      </div>
+      
+        <div class="avatar">
+          
+            <a href="/about"><img src="https://cn.gravatar.com/avatar/35fef74d731255cd569c2c2b0b9e87e4?s=200"></a>
+          
+        </div>
+      
+    </div>
+  </div>
+  <div class="body">
+    
+      
+        <ul class="nav">
+          
+            
+              <li class="category-list-container">
+                <a href="javascript:;">Category</a>
+                
+              </li>
+            
+          
+            
+              <li class="tag-list-container">
+                <a href="javascript:;">Tag</a>
+                
+              </li>
+            
+          
+            
+              <li class="archive-list-container">
+                <a href="javascript:;">Archive</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">7</span></li></ul>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="/" title="Homepage">Homepage</a>
+              </li>
+            
+          
+        </ul>
+      
+        <ul class="nav">
+          
+            
+              <li>
+                <a href="https://github.com/Annena/Annena.github.io" title="Annena" target="_blank" rel="noopener">Annena</a>
+              </li>
+            
+          
+            
+              <li>
+                <a href="https://github.com/Annena" title="Github" target="_blank" rel="noopener">Github</a>
+              </li>
+            
+          
+        </ul>
+      
+    
+  </div>
+</div>
+
+    <div class="main-content">
+      
+        <div style="max-width: 1000px">
+      
+          <article id="post-Angular-controller" class="article article-type-post">
+  
+    <h1 class="article-header">
+      Angular中父controller与子controller之间的传递
+    </h1>
+  
+  
+
+  <div class="article-info">
+    <span class="article-date">
+  2017-08-11
+</span>
+
+    
+
+    
+
+  </div>
+  <div class="article-entry">
+    <p>不同controller里面父级与子级之前的值传递，因为broadcast是广播，所以所有的子级路由都能接收到；<br>但是emit是冒泡，因为只有一个父级。</p>
+<h3 id="父级与子级之间的创建"><a href="#父级与子级之间的创建" class="headerlink" title="父级与子级之间的创建"></a>父级与子级之间的创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller = <span class="string">"parent"</span>&gt;		  //父级</span><br><span class="line">	&lt;div ng-controller = <span class="string">'childOne'</span>&gt;  //本身</span><br><span class="line">		&lt;a ng-click = getCont()&gt;Click me&lt;/a&gt;</span><br><span class="line">		&lt;div ng-controller = <span class="string">'grandson'</span>&gt;&lt;/div&gt; //本身的子级</span><br><span class="line">	&lt;/div&gt; </span><br><span class="line">	&lt;div ng-controller = <span class="string">'childTwo'</span>&gt;&lt;/div&gt;	//本身的兄弟</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="发送值"><a href="#发送值" class="headerlink" title="发送值"></a>发送值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">familyControllers.controller(<span class="string">'childOne'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.click = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$broadcast</span>(<span class="string">'to-child'</span>,<span class="string">'child'</span>);   //向本身的子级发送</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$emit</span>(<span class="string">'to-parent'</span>,<span class="string">'parent'</span>);      //向本身的父级发送</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="获得值"><a href="#获得值" class="headerlink" title="获得值"></a>获得值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### 父级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'parent'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//可以获得成功 为‘parent’</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">#### 子级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'grandson'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//可以获得成功 为‘child’</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">#### 平级获得值</span></span><br><span class="line">familyControllers.controller(<span class="string">'childTwo'</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>)&#123;</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-parent'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//平级得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">'to-child'</span>,<span class="keyword">function</span>(data)&#123;</span><br><span class="line">		console.log(data);			//平级得不到值</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+  </div>
+  <footer class="article-footer">
+    
+  <div class="cc">
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en" target="_blank" title="Attribution-ShareAlike">
+      <img src="/images/cc/cc.png">
+      
+          <img src="/images/cc/by.png">
+        
+          <img src="/images/cc/sa.png">
+      
+      <span>
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      </span>
+    </a>
+  </div>
+
+
+    
+
+  </footer>
+</article>
+
+
+
+
+
+
+
+          <div class="main-footer">
+  
+    © 2018 Lina&#39;s blog - Powered by <a href="http://hexo.io" target="_blank">Hexo</a> - Theme <a href="https://github.com/Annena" target="_blank">Annena</a>
+  
+</div>
+
+      
+        </div>
+      
+    </div>
+  </div>
+  <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="/PhotoSwipe/photoswipe.css">
+  <link rel="stylesheet" href="/PhotoSwipe/default-skin/default-skin.css">
+
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+      <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+      <div class="pswp__container">
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+        <div class="pswp__item"></div>
+      </div>
+
+      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+      <div class="pswp__ui pswp__ui--hidden">
+
+        <div class="pswp__top-bar">
+
+          <!--  Controls are self-explanatory. Order can be changed. -->
+
+          <div class="pswp__counter"></div>
+
+          <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+          <button class="pswp__button pswp__button--share" title="Share"></button>
+
+          <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+          <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+          <!-- element will get class pswp__preloader--active when preloader is running -->
+          <div class="pswp__preloader">
+            <div class="pswp__preloader__icn">
+              <div class="pswp__preloader__cut">
+                <div class="pswp__preloader__donut"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+          <div class="pswp__share-tooltip"></div>
+        </div>
+
+        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+
+        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+
+        <div class="pswp__caption">
+          <div class="pswp__caption__center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/PhotoSwipe/photoswipe.js"></script>
+  <script src="/PhotoSwipe/photoswipe-ui-default.js"></script>
+
+
+<script src="/perfect-scrollbar/js/min/perfect-scrollbar.min.js"></script>
+<script src="/scripts/main.js"></script>
+
+</body>
+</html>
