@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html lang="">
+<head prefix="og: http://ogp.me/ns#">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <title>Angular中父controller与子controller之间的传递 | Lina&#39;s blog</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x4E0D;&amp;#x540C;controller&amp;#x91CC;&amp;#x9762;&amp;#x7236;&amp;#x7EA7;&amp;#x4E0E;&amp;#x5B50;&amp;#x7EA7;&amp;#x4E4B;&amp;#x524D;&amp;#x7684;&amp;#x503C;&amp;#x4F20;&amp;#x9012;&amp;#xFF0C;&amp;#x56E0;&amp;#x4E3A;broadcast&amp;#x662F;&amp;#x5E7F;&amp;#x64AD;&amp;#xFF0C;&amp;#x62">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular中父controller与子controller之间的传递">
+<meta property="og:url" content="http://yoursite.com/2017/08/11/Angular-controller/index.html">
+<meta property="og:site_name" content="Lina&#39;s blog">
+<meta property="og:description" content="&amp;#x4E0D;&amp;#x540C;controller&amp;#x91CC;&amp;#x9762;&amp;#x7236;&amp;#x7EA7;&amp;#x4E0E;&amp;#x5B50;&amp;#x7EA7;&amp;#x4E4B;&amp;#x524D;&amp;#x7684;&amp;#x503C;&amp;#x4F20;&amp;#x9012;&amp;#xFF0C;&amp;#x56E0;&amp;#x4E3A;broadcast&amp;#x662F;&amp;#x5E7F;&amp;#x64AD;&amp;#xFF0C;&amp;#x62">
+<meta property="og:updated_time" content="2018-03-11T07:41:20.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular中父controller与子controller之间的传递">
+<meta name="twitter:description" content="&amp;#x4E0D;&amp;#x540C;controller&amp;#x91CC;&amp;#x9762;&amp;#x7236;&amp;#x7EA7;&amp;#x4E0E;&amp;#x5B50;&amp;#x7EA7;&amp;#x4E4B;&amp;#x524D;&amp;#x7684;&amp;#x503C;&amp;#x4F20;&amp;#x9012;&amp;#xFF0C;&amp;#x56E0;&amp;#x4E3A;broadcast&amp;#x662F;&amp;#x5E7F;&amp;#x64AD;&amp;#xFF0C;&amp;#x62">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "Lina",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Lina&#39;s blog</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">Lina</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item" >
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Angular-controller" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    Angular中父controller与子controller之间的传递
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <p>&#x4E0D;&#x540C;controller&#x91CC;&#x9762;&#x7236;&#x7EA7;&#x4E0E;&#x5B50;&#x7EA7;&#x4E4B;&#x524D;&#x7684;&#x503C;&#x4F20;&#x9012;&#xFF0C;&#x56E0;&#x4E3A;broadcast&#x662F;&#x5E7F;&#x64AD;&#xFF0C;&#x6240;&#x4EE5;&#x6240;&#x6709;&#x7684;&#x5B50;&#x7EA7;&#x8DEF;&#x7531;&#x90FD;&#x80FD;&#x63A5;&#x6536;&#x5230;&#xFF1B;<br>&#x4F46;&#x662F;emit&#x662F;&#x5192;&#x6CE1;&#xFF0C;&#x56E0;&#x4E3A;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7236;&#x7EA7;&#x3002;</p>
+<h3 id="&#x7236;&#x7EA7;&#x4E0E;&#x5B50;&#x7EA7;&#x4E4B;&#x95F4;&#x7684;&#x521B;&#x5EFA;"><a href="#&#x7236;&#x7EA7;&#x4E0E;&#x5B50;&#x7EA7;&#x4E4B;&#x95F4;&#x7684;&#x521B;&#x5EFA;" class="headerlink" title="&#x7236;&#x7EA7;&#x4E0E;&#x5B50;&#x7EA7;&#x4E4B;&#x95F4;&#x7684;&#x521B;&#x5EFA;"></a>&#x7236;&#x7EA7;&#x4E0E;&#x5B50;&#x7EA7;&#x4E4B;&#x95F4;&#x7684;&#x521B;&#x5EFA;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller = <span class="string">&quot;parent&quot;</span>&gt;		  //&#x7236;&#x7EA7;</span><br><span class="line">	&lt;div ng-controller = <span class="string">&apos;childOne&apos;</span>&gt;  //&#x672C;&#x8EAB;</span><br><span class="line">		&lt;a ng-click = getCont()&gt;Click me&lt;/a&gt;</span><br><span class="line">		&lt;div ng-controller = <span class="string">&apos;grandson&apos;</span>&gt;&lt;/div&gt; //&#x672C;&#x8EAB;&#x7684;&#x5B50;&#x7EA7;</span><br><span class="line">	&lt;/div&gt; </span><br><span class="line">	&lt;div ng-controller = <span class="string">&apos;childTwo&apos;</span>&gt;&lt;/div&gt;	//&#x672C;&#x8EAB;&#x7684;&#x5144;&#x5F1F;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="&#x53D1;&#x9001;&#x503C;"><a href="#&#x53D1;&#x9001;&#x503C;" class="headerlink" title="&#x53D1;&#x9001;&#x503C;"></a>&#x53D1;&#x9001;&#x503C;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">familyControllers.controller(<span class="string">&apos;childOne&apos;</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>){</span><br><span class="line">	<span class="variable">$scope</span>.click = <span class="function"><span class="title">function</span></span>(){</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$broadcast</span>(<span class="string">&apos;to-child&apos;</span>,<span class="string">&apos;child&apos;</span>);   //&#x5411;&#x672C;&#x8EAB;&#x7684;&#x5B50;&#x7EA7;&#x53D1;&#x9001;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$emit</span>(<span class="string">&apos;to-parent&apos;</span>,<span class="string">&apos;parent&apos;</span>);      //&#x5411;&#x672C;&#x8EAB;&#x7684;&#x7236;&#x7EA7;&#x53D1;&#x9001;</span><br><span class="line">	}</span><br><span class="line">});</span><br></pre></td></tr></table></figure>
+<h3 id="&#x83B7;&#x5F97;&#x503C;"><a href="#&#x83B7;&#x5F97;&#x503C;" class="headerlink" title="&#x83B7;&#x5F97;&#x503C;"></a>&#x83B7;&#x5F97;&#x503C;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### &#x7236;&#x7EA7;&#x83B7;&#x5F97;&#x503C;</span></span><br><span class="line">familyControllers.controller(<span class="string">&apos;parent&apos;</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>){</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-parent&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x6210;&#x529F; &#x4E3A;&#x2018;parent&#x2019;</span><br><span class="line">	});</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-child&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x5F97;&#x4E0D;&#x5230;&#x503C;</span><br><span class="line">	});</span><br><span class="line">});</span><br><span class="line"><span class="comment">#### &#x5B50;&#x7EA7;&#x83B7;&#x5F97;&#x503C;</span></span><br><span class="line">familyControllers.controller(<span class="string">&apos;grandson&apos;</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>){</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-parent&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x5F97;&#x4E0D;&#x5230;&#x503C;</span><br><span class="line">	});</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-child&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x6210;&#x529F; &#x4E3A;&#x2018;child&#x2019;</span><br><span class="line">	});</span><br><span class="line">});</span><br><span class="line"><span class="comment">#### &#x5E73;&#x7EA7;&#x83B7;&#x5F97;&#x503C;</span></span><br><span class="line">familyControllers.controller(<span class="string">&apos;childTwo&apos;</span>,<span class="keyword">function</span>(<span class="variable">$scope</span>){</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-parent&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x5E73;&#x7EA7;&#x5F97;&#x4E0D;&#x5230;&#x503C;</span><br><span class="line">	});</span><br><span class="line">	<span class="variable">$scope</span>.on(<span class="string">&apos;to-child&apos;</span>,<span class="keyword">function</span>(data){</span><br><span class="line">		console.log(data);			//&#x5E73;&#x7EA7;&#x5F97;&#x4E0D;&#x5230;&#x503C;</span><br><span class="line">	});</span><br><span class="line">});</span><br></pre></td></tr></table></figure>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2017-08-11T06:15:21.000Z" itemprop="datePublished">2017-08-11</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2018/03/11/hello-world/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    Hello World
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a class="ui tiny button disabled">Next<i class="angle right icon"></i></a>
+
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#父级与子级之间的创建"><span>父级与子级之间的创建</span></a></li><li><a href="#发送值"><span>发送值</span></a></li><li><a href="#获得值"><span>获得值</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2018 <a href="/">Lina</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
+                href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>
