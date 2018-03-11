@@ -1,252 +1,651 @@
-
-
 <!DOCTYPE html>
-<html lang="">
-<head prefix="og: http://ogp.me/ns#">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <title>angular中的请求以及错误的提示 | Lina&#39;s blog</title>
+<html>
+    <!-- title -->
 
-    <!-- Open Graph -->
-    <meta name="description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
-<meta property="og:type" content="article">
-<meta property="og:title" content="angular中的请求以及错误的提示">
-<meta property="og:url" content="http://yoursite.com/2017/08/11/Angular-Ajax/index.html">
-<meta property="og:site_name" content="Lina&#39;s blog">
-<meta property="og:description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
-<meta property="og:updated_time" content="2018-03-11T07:55:44.097Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angular中的请求以及错误的提示">
-<meta name="twitter:description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
 
-    <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "email": "mailto:",
-  "image": "",
-  "name": "Lina",
-  "url": "http://yoursite.com"
-}
+
+
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>angular中的请求以及错误的提示 · fi3ework&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s 1;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= /css/style.css?v=20180311 as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180311 media="(max-width: 980px)"/>
+    <link rel="icon" href= /assets/favicon.ico>
+    <script>
+  // load webfont-loader async, and add callback function
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+  
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+      if (postIntroTags) {
+        postIntroTags.classList.add('post-fade-in');
+      }
+      if (postIntroMeat) {
+        postIntroMeat.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  async("https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", asyncCb)
 </script>
     <script>
-    var algoliaEnabled = false;
-    
-</script>
+        (function (w) {
+            "use strict";
+            // rel=preload support test
+            if (!w.loadCSS) {
+                w.loadCSS = function () { };
+            }
+            // define on the loadCSS obj
+            var rp = loadCSS.relpreload = {};
+            // rel=preload feature support test
+            // runs once and returns a function for compat purposes
+            rp.support = (function () {
+                var ret;
+                try {
+                    ret = w.document.createElement("link").relList.supports("preload");
+                } catch (e) {
+                    ret = false;
+                }
+                return function () {
+                    return ret;
+                };
+            })();
 
-    
+            // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+            // then change that media back to its intended value on load
+            rp.bindMediaToggle = function (link) {
+                // remember existing media attr for ultimate state, or default to 'all'
+                var finalMedia = link.media || "all";
 
-    
-    
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    
-    
-    
-        <!-- stylesheets list from config.yml -->
-        
-        <link rel="stylesheet" href="/css/aloha.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
-        
-        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
-        
-    
+                function enableStylesheet() {
+                    link.media = finalMedia;
+                }
 
+                // bind load handlers to enable media
+                if (link.addEventListener) {
+                    link.addEventListener("load", enableStylesheet);
+                } else if (link.attachEvent) {
+                    link.attachEvent("onload", enableStylesheet);
+                }
+
+                // Set rel and non-applicable media type to start an async request
+                // note: timeout allows this to happen async to let rendering continue in IE
+                setTimeout(function () {
+                    link.rel = "stylesheet";
+                    link.media = "only x";
+                });
+                // also enable media after 3 seconds,
+                // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+                setTimeout(enableStylesheet, 3000);
+            };
+
+            // loop through link elements in DOM
+            rp.poly = function () {
+                // double check this to prevent external calls from running
+                if (rp.support()) {
+                    return;
+                }
+                var links = w.document.getElementsByTagName("link");
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    // qualify links to those with rel=preload and as=style attrs
+                    if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+                        // prevent rerunning on link
+                        link.setAttribute("data-loadcss", true);
+                        // bind listeners to toggle media back
+                        rp.bindMediaToggle(link);
+                    }
+                }
+            };
+
+            // if unsupported, run the polyfill
+            if (!rp.support()) {
+                // run once at least
+                rp.poly();
+
+                // rerun poly on an interval until onload
+                var run = w.setInterval(rp.poly, 500);
+                if (w.addEventListener) {
+                    w.addEventListener("load", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                } else if (w.attachEvent) {
+                    w.attachEvent("onload", function () {
+                        rp.poly();
+                        w.clearInterval(run);
+                    });
+                }
+            }
+            // commonjs
+            if (typeof exports !== "undefined") {
+                exports.loadCSS = loadCSS;
+            }
+            else {
+                w.loadCSS = loadCSS;
+            }
+        }(typeof global !== "undefined" ? global : this));
+    </script>
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
 </head>
-<body id="body" style="margin-bottom: 0;" class="pushable">
 
-    <div class="ui top fixed menu">
-        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
-    </div>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
 
-    <div id="menu-sidebar" class="ui left vertical sidebar menu">
-
-    <div id="sidebar-top">
-        <div class="content">
-            <h3>Lina&#39;s blog</h3>
-        </div>
-    </div>
-    <div class="ui container sidebar-card">
-    <div class="ui people shape content">
-        <div class="active side">
-            <div class="ui card">
-                <div class="image">
-                    <img class="ui medium bordered image" src="/images/avatar.jpg">
-                </div>
-                <div class="content">
-                    <a class="header">Lina</a>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                        
-                    </div>
-
-                </div>
-                <div class="extra content">
-                    <div class="ui list">
-                        
-                    </div>
-                </div>
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >fi3ework&#39;s Studio.</a>
             </div>
-        </div>
+            <div class="post-title">
+                <a href="#" class="post-name">angular中的请求以及错误的提示</a>
+            </div>
     </div>
+    
+    <a class="home-link" href=/>fi3ework's Studio.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style=
 
 
-</div>
 
+
+
+
+
+
+height:50vh;
+
+>
+    
+    <!-- 主页  -->
     
     
-
-    
-
-    
-    <a href="/index.html" class="item" >
-        <i class="home icon"></i>
-        HOME
-    </a>
-
-    
-
-    
-</div>
-
-    <div class="pusher body-content">
-        <div id="content" class="ui main container">
-            <!--<div class="ui one column grid">-->
-                <!--<div class="column">-->
-                    <!--<div class="ui main container">-->
-                        <div id="post-Angular-Ajax" class="ui main container article-type-post">
-
-    
-
-    <div class="ui divided grid">
-
-        <div class="two column row" id="article-content">
-
-            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
-                
-
-<h1 class="ui header">
-    
-    angular中的请求以及错误的提示
-</h1>
-
-
-
-                <div class="article-inner">
-
-                    <div class="article-entry" itemprop="articleBody">
-                        
-                        <h3 id="&#x7B2C;&#x4E00;&#x79CD;-Angular&#x4E2D;&#x7684;-http-http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;-&#xFF1A;"><a href="#&#x7B2C;&#x4E00;&#x79CD;-Angular&#x4E2D;&#x7684;-http-http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E00;&#x79CD;(Angular&#x4E2D;&#x7684;$http,$http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;)&#xFF1A;"></a>&#x7B2C;&#x4E00;&#x79CD;(Angular&#x4E2D;&#x7684;$http,$http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$http</span>({method:<span class="string">&quot;put&quot;</span>,</span><br><span class="line">			url:url + <span class="string">&quot;/workgroups&quot;</span>,</span><br><span class="line">			contentType: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">			dataType:<span class="string">&quot;JSON&quot;</span>,</span><br><span class="line">                headers:{<span class="string">&apos;appId&apos;</span>:<span class="string">&apos;001&apos;</span>},</span><br><span class="line">                        data:JSON.stringify(data),</span><br><span class="line">                        async: <span class="literal">false</span>})</span><br><span class="line">	    .success(<span class="keyword">function</span>(data){</span><br><span class="line">	          alert(<span class="string">&quot;&#x4FEE;&#x6539;&#x6210;&#x529F;!&quot;</span>)</span><br><span class="line">	          <span class="variable">$state</span>.go(<span class="string">&quot;app.workgroup.workgroup&quot;</span>);</span><br><span class="line">		})</span><br><span class="line">	    .error(<span class="keyword">function</span>(data,e,dx){</span><br><span class="line">	        alert(dx(<span class="string">&quot;X-configApp-error&quot;</span>));</span><br><span class="line">	        <span class="built_in">return</span>;</span><br><span class="line">	    });</span><br></pre></td></tr></table></figure>
-<h3 id="&#x7B2C;&#x4E8C;&#x79CD;-Angular&#x4E2D;&#x7684;-http&#x76F4;&#x63A5;&#x52A0;get-&#xFF1A;"><a href="#&#x7B2C;&#x4E8C;&#x79CD;-Angular&#x4E2D;&#x7684;-http&#x76F4;&#x63A5;&#x52A0;get-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x79CD;(Angular&#x4E2D;&#x7684;$http&#x76F4;&#x63A5;&#x52A0;get)&#xFF1A;"></a>&#x7B2C;&#x4E8C;&#x79CD;(Angular&#x4E2D;&#x7684;$http&#x76F4;&#x63A5;&#x52A0;get)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####&#x4E00;&#x822C;&#x7528;&#x4E8E;&#x53EA;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x3001;&#x6216;&#x8005;&#x5220;&#x9664;&#x9700;&#x8981;&#x5411;&#x540E;&#x53F0;&#x4F20;&#x7684;&#x4E1C;&#x897F;&#x5F88;&#x5C11;&#x65F6;&#x4F7F;&#x7528;</span></span><br><span class="line"><span class="variable">$http</span>.get(url+<span class="string">&quot;/monitor-points?page=&quot;</span>+(page - 1)+<span class="string">&quot;&amp;size=&quot;</span>+pageSize+urlData).success(<span class="keyword">function</span> (largeLoad,status,dx) {</span><br><span class="line">                	<span class="variable">$scope</span>.totalServerItems = dx(<span class="string">&quot;X-Total-Count&quot;</span>);//&#x8FD4;&#x56DE;&#x8BB0;&#x5F55;&#x7684;&#x603B;&#x6570;</span><br><span class="line">                    data = largeLoad.filter(<span class="keyword">function</span>(item) {</span><br><span class="line">                        <span class="built_in">return</span> JSON.stringify(item).toLowerCase().indexOf(ft) != -1;</span><br><span class="line">                    });</span><br><span class="line">                    <span class="variable">$scope</span>.setPagingData(data,page,pageSize);</span><br><span class="line">                });</span><br><span class="line"><span class="variable">$http</span>.delete(url+<span class="string">&quot;/monitor-points/&quot;</span>+row.entity.id,)</span><br><span class="line">        	.success(<span class="function"><span class="title">function</span></span>(){</span><br><span class="line">        		alert(<span class="string">&quot;&#x5220;&#x9664;&#x6210;&#x529F;&#xFF01;&quot;</span>);</span><br><span class="line">        		<span class="variable">$state</span>.go(<span class="string">&quot;app.point.point&quot;</span>,{},{reload:<span class="literal">true</span>});</span><br><span class="line">        	}) </span><br><span class="line">        	.error(<span class="keyword">function</span>(data){</span><br><span class="line">        	 alert(data.message);</span><br><span class="line">        	});</span><br><span class="line">        var header = {<span class="string">&apos;appId&apos;</span>:<span class="string">&apos;001&apos;</span>};</span><br><span class="line">		<span class="variable">$http</span>.get(url+<span class="string">&quot;/monitor-points/&quot;</span>+modify_id,{headers:header})</span><br><span class="line">		.success(<span class="keyword">function</span>(data){</span><br><span class="line">			//&#x9ED8;&#x8BA4;&#x9009;&#x4E2D;&#x4F20;&#x8FC7;&#x6765;&#x7684;&#x503C;</span><br><span class="line">			<span class="variable">$scope</span>.point = data.entity.monitorPoint;</span><br><span class="line">			<span class="variable">$scope</span>.attrs=data.entity.attrs;</span><br><span class="line">			<span class="variable">$scope</span>.setWorkGroupById(<span class="variable">$scope</span>.point.workgroupId);</span><br><span class="line">			<span class="variable">$scope</span>.setGateWayById(<span class="variable">$scope</span>.point.gatewayId);</span><br><span class="line">//			console.log(data.gatewayTypeId);</span><br><span class="line">		}).error(<span class="keyword">function</span>(data){</span><br><span class="line">           alert(data.message);</span><br><span class="line">        });</span><br></pre></td></tr></table></figure>
-<h3 id="&#x7B2C;&#x4E09;&#x79CD;-JQ&#x7684;Ajax-&#xFF1A;"><a href="#&#x7B2C;&#x4E09;&#x79CD;-JQ&#x7684;Ajax-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E09;&#x79CD;(JQ&#x7684;Ajax)&#xFF1A;"></a>&#x7B2C;&#x4E09;&#x79CD;(JQ&#x7684;Ajax)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$.ajax({</span><br><span class="line">        		url:url + <span class="string">&quot;/da-devices&quot;</span>,</span><br><span class="line">        		<span class="built_in">type</span>:<span class="string">&quot;POST&quot;</span>,</span><br><span class="line">        		data:JSON.stringify(data),</span><br><span class="line">        		contentType:<span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        		async: <span class="literal">false</span></span><br><span class="line">        	}).success(<span class="keyword">function</span>(data){</span><br><span class="line">        		alert(<span class="string">&quot;&#x521B;&#x5EFA;&#x6210;&#x529F;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&quot;</span>);</span><br><span class="line">        	}).error(<span class="keyword">function</span>(data){</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">$.ajax({</span><br><span class="line">    			url:url+<span class="string">&apos;/da-devices&apos;</span>,</span><br><span class="line">    			<span class="built_in">type</span>:<span class="string">&quot;PUT&quot;</span>,</span><br><span class="line">    			data:JSON.stringify(<span class="variable">$scope</span>.tcpData),</span><br><span class="line">    			contentType:<span class="string">&apos;application/json&apos;</span>,</span><br><span class="line">    			async:<span class="literal">false</span></span><br><span class="line">    		}).success(<span class="keyword">function</span>(data){</span><br><span class="line">    			alert(<span class="string">&apos;&#x4FEE;&#x6539;&#x6210;&#x529F;!!!!&apos;</span>);</span><br><span class="line">    			<span class="variable">$state</span>.go(<span class="string">&apos;app.point.view.collector.list&apos;</span>);</span><br><span class="line">    		}).error(<span class="keyword">function</span>(data){</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            })</span><br></pre></td></tr></table></figure>
-
-                        
-                    </div>
-
-                    
-                    
-                    
-
-                    <div class="description post-description">
-    <span class="post-description-item">
-        <time datetime="2017-08-10T16:00:00.000Z" itemprop="datePublished">2017-08-11</time>
-
-    </span>
-    <span class="post-description-item">
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            angular中的请求以及错误的提示
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
         
-    </span>
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/08/11</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
+        
+    </div>
 </div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
 
-                </div>
-                
-                <div id="pagination" class="nav-web ui text container pagination">
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="第一种-Angular中的-http-http无法设置为同步-："><a href="#第一种-Angular中的-http-http无法设置为同步-：" class="headerlink" title="第一种(Angular中的$http,$http无法设置为同步)："></a>第一种(Angular中的$http,$http无法设置为同步)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$http</span>(&#123;method:<span class="string">"put"</span>,</span><br><span class="line">			url:url + <span class="string">"/workgroups"</span>,</span><br><span class="line">			contentType: <span class="string">"application/json"</span>,</span><br><span class="line">			dataType:<span class="string">"JSON"</span>,</span><br><span class="line">                headers:&#123;<span class="string">'appId'</span>:<span class="string">'001'</span>&#125;,</span><br><span class="line">                        data:JSON.stringify(data),</span><br><span class="line">                        async: <span class="literal">false</span>&#125;)</span><br><span class="line">	    .success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">	          alert(<span class="string">"修改成功!"</span>)</span><br><span class="line">	          <span class="variable">$state</span>.go(<span class="string">"app.workgroup.workgroup"</span>);</span><br><span class="line">		&#125;)</span><br><span class="line">	    .error(<span class="keyword">function</span>(data,e,dx)&#123;</span><br><span class="line">	        alert(dx(<span class="string">"X-configApp-error"</span>));</span><br><span class="line">	        <span class="built_in">return</span>;</span><br><span class="line">	    &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="第二种-Angular中的-http直接加get-："><a href="#第二种-Angular中的-http直接加get-：" class="headerlink" title="第二种(Angular中的$http直接加get)："></a>第二种(Angular中的$http直接加get)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####一般用于只请求数据、或者删除需要向后台传的东西很少时使用</span></span><br><span class="line"><span class="variable">$http</span>.get(url+<span class="string">"/monitor-points?page="</span>+(page - 1)+<span class="string">"&amp;size="</span>+pageSize+urlData).success(<span class="keyword">function</span> (largeLoad,status,dx) &#123;</span><br><span class="line">                	<span class="variable">$scope</span>.totalServerItems = dx(<span class="string">"X-Total-Count"</span>);//返回记录的总数</span><br><span class="line">                    data = largeLoad.filter(<span class="keyword">function</span>(item) &#123;</span><br><span class="line">                        <span class="built_in">return</span> JSON.stringify(item).toLowerCase().indexOf(ft) != -1;</span><br><span class="line">                    &#125;);</span><br><span class="line">                    <span class="variable">$scope</span>.setPagingData(data,page,pageSize);</span><br><span class="line">                &#125;);</span><br><span class="line"><span class="variable">$http</span>.delete(url+<span class="string">"/monitor-points/"</span>+row.entity.id,)</span><br><span class="line">        	.success(<span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">        		alert(<span class="string">"删除成功！"</span>);</span><br><span class="line">        		<span class="variable">$state</span>.go(<span class="string">"app.point.point"</span>,&#123;&#125;,&#123;reload:<span class="literal">true</span>&#125;);</span><br><span class="line">        	&#125;) </span><br><span class="line">        	.error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">        	 alert(data.message);</span><br><span class="line">        	&#125;);</span><br><span class="line">        var header = &#123;<span class="string">'appId'</span>:<span class="string">'001'</span>&#125;;</span><br><span class="line">		<span class="variable">$http</span>.get(url+<span class="string">"/monitor-points/"</span>+modify_id,&#123;headers:header&#125;)</span><br><span class="line">		.success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">			//默认选中传过来的值</span><br><span class="line">			<span class="variable">$scope</span>.point = data.entity.monitorPoint;</span><br><span class="line">			<span class="variable">$scope</span>.attrs=data.entity.attrs;</span><br><span class="line">			<span class="variable">$scope</span>.setWorkGroupById(<span class="variable">$scope</span>.point.workgroupId);</span><br><span class="line">			<span class="variable">$scope</span>.setGateWayById(<span class="variable">$scope</span>.point.gatewayId);</span><br><span class="line">//			console.log(data.gatewayTypeId);</span><br><span class="line">		&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">           alert(data.message);</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="第三种-JQ的Ajax-："><a href="#第三种-JQ的Ajax-：" class="headerlink" title="第三种(JQ的Ajax)："></a>第三种(JQ的Ajax)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">        		url:url + <span class="string">"/da-devices"</span>,</span><br><span class="line">        		<span class="built_in">type</span>:<span class="string">"POST"</span>,</span><br><span class="line">        		data:JSON.stringify(data),</span><br><span class="line">        		contentType:<span class="string">"application/json"</span>,</span><br><span class="line">        		async: <span class="literal">false</span></span><br><span class="line">        	&#125;).success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">        		alert(<span class="string">"创建成功！！！！"</span>);</span><br><span class="line">        	&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    			url:url+<span class="string">'/da-devices'</span>,</span><br><span class="line">    			<span class="built_in">type</span>:<span class="string">"PUT"</span>,</span><br><span class="line">    			data:JSON.stringify(<span class="variable">$scope</span>.tcpData),</span><br><span class="line">    			contentType:<span class="string">'application/json'</span>,</span><br><span class="line">    			async:<span class="literal">false</span></span><br><span class="line">    		&#125;).success(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">    			alert(<span class="string">'修改成功!!!!'</span>);</span><br><span class="line">    			<span class="variable">$state</span>.go(<span class="string">'app.point.view.collector.list'</span>);</span><br><span class="line">    		&#125;).error(<span class="keyword">function</span>(data)&#123;</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
 
-    <div class="ui stackable two column divided grid container">
-        <div class="row">
-            <div class="column nav-left">
-                
-
-                <a href="/2017/08/11/Angular-controller/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    Angular中父controller与子controller之间的传递
-                    
-
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2017/08/11/Angular-controller/" title= Angular中父controller与子controller之间的传递 >
+                    <div class="nextTitle">Angular中父controller与子controller之间的传递</div>
                 </a>
-
-                
-            </div>
-            <div class="column nav-right">
-                
-
-                <a href="/2017/08/05/IP与Mac的正则/" class="ui tiny button">
-                    
-                    IP与Mac的正则
-                    
-                    <i class="angle right icon"></i></a>
-                
-            </div>
-        </div>
-    </div>
-
-</div>
-                
-            </div>
-
             
-            <div class="three wide computer three wide tablet column">
-
-                <div class="ui sticky article-toc" id="article-toc">
-                    <!-- toc -->
-                    <ol class="ui ordered list"><li><a href="#第一种-Angular中的-http-http无法设置为同步-："><span>第一种(Angular中的$http,$http无法设置为同步)：</span></a></li><li><a href="#第二种-Angular中的-http直接加get-："><span>第二种(Angular中的$http直接加get)：</span></a></li><li><a href="#第三种-JQ的Ajax-："><span>第三种(JQ的Ajax)：</span></a></li></ol>
-                </div>
-
-            </div>
+        </li>
+        <li class="previous">
             
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/08/07/Angular中服务factory的使用/" title= Angular中服务factory的使用 >
+                    <div class="prevTitle">Angular中服务factory的使用</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
         </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:12345@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/fi3ework" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
     </div>
-</div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+        <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
 
 
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <div class="ui vertical footer segment">
-    <div class="ui center aligned container">
-        <div class="ui inverted section divider"></div>
-        &copy; 2018 <a href="/">Lina</a>,
-        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
-                href="http://hexo.io/" target="_blank">Hexo</a>.
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一种-Angular中的-http-http无法设置为同步-："><span class="toc-number">1.</span> <span class="toc-text">第一种(Angular中的$http,$http无法设置为同步)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二种-Angular中的-http直接加get-："><span class="toc-number">2.</span> <span class="toc-text">第二种(Angular中的$http直接加get)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三种-JQ的Ajax-："><span class="toc-number">3.</span> <span class="toc-text">第三种(JQ的Ajax)：</span></a></li></ol>
     </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 7 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2017/08/11/Angular-controller/" >Angular中父controller与子controller之间的传递</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2017/08/11/Angular-Ajax/" >angular中的请求以及错误的提示</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/07</span><a class="archive-post-title" href= "/2017/08/07/Angular中服务factory的使用/" >Angular中服务factory的使用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span><a class="archive-post-title" href= "/2017/08/05/IP与Mac的正则/" >IP与Mac的正则</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/11</span><a class="archive-post-title" href= "/2017/06/11/Angular中的路由传参/" >Angular中的路由传参</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2017/03/11/你好，Hexo/" >你好，Hexo</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span><a class="archive-post-title" href= "/2017/03/11/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
 </div>
-
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
     </div>
-
-
-
-
-<!-- scripts list from theme config.yml -->
-
-<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
-
-<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
-
-<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
-
-<script src="/js/semantic-ui-algolia.js"></script>
-
-<script src="/js/aloha-events.js"></script>
-
-
-
-</body>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: '/',
+        author: 'Lina'
+    }
+</script>
+    <!-- busuanzi  -->
+    
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+    
+    </body>
 </html>
+
+
