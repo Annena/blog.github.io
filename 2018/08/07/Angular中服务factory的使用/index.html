@@ -6,16 +6,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta name="description" content="">
-    <title>你好，Hexo | Lina&#39;s blog</title>
+    <title>Angular中服务factory的使用 | Lina&#39;s blog</title>
 
     <!-- Open Graph -->
-    <meta property="og:type" content="article">
-<meta property="og:title" content="你好，Hexo">
-<meta property="og:url" content="http://yoursite.com/2018/03/11/你好，Hexo/index.html">
+    <meta name="description" content="&amp;#x8DEF;&amp;#x7531;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF1A;12345678910111213//&amp;#x4E0A;&amp;#x62A5;&amp;#x7B56;&amp;#x7565;&amp;#x4FEE;&amp;#x6539;  .state(&amp;apos;app.point.report.modify&amp;apos;,{	  url:&amp;apos;/modify&amp;apos;,	  params:{id:null},">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular中服务factory的使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/07/Angular中服务factory的使用/index.html">
 <meta property="og:site_name" content="Lina&#39;s blog">
-<meta property="og:updated_time" content="2018-03-11T06:15:21.530Z">
+<meta property="og:description" content="&amp;#x8DEF;&amp;#x7531;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF1A;12345678910111213//&amp;#x4E0A;&amp;#x62A5;&amp;#x7B56;&amp;#x7565;&amp;#x4FEE;&amp;#x6539;  .state(&amp;apos;app.point.report.modify&amp;apos;,{	  url:&amp;apos;/modify&amp;apos;,	  params:{id:null},">
+<meta property="og:updated_time" content="2018-03-11T08:28:59.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="你好，Hexo">
+<meta name="twitter:title" content="Angular中服务factory的使用">
+<meta name="twitter:description" content="&amp;#x8DEF;&amp;#x7531;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF1A;12345678910111213//&amp;#x4E0A;&amp;#x62A5;&amp;#x7B56;&amp;#x7565;&amp;#x4FEE;&amp;#x6539;  .state(&amp;apos;app.point.report.modify&amp;apos;,{	  url:&amp;apos;/modify&amp;apos;,	  params:{id:null},">
 
     <script type="application/ld+json">
 {
@@ -115,7 +118,7 @@
             <!--<div class="ui one column grid">-->
                 <!--<div class="column">-->
                     <!--<div class="ui main container">-->
-                        <div id="post-你好，Hexo" class="ui main container article-type-post">
+                        <div id="post-Angular中服务factory的使用" class="ui main container article-type-post">
 
     
 
@@ -128,7 +131,7 @@
 
 <h1 class="ui header">
     
-    你好，Hexo
+    Angular中服务factory的使用
 </h1>
 
 
@@ -137,7 +140,10 @@
 
                     <div class="article-entry" itemprop="articleBody">
                         
-                        
+                        <h3 id="&#x8DEF;&#x7531;&#x5B9A;&#x4E49;&#xFF1A;"><a href="#&#x8DEF;&#x7531;&#x5B9A;&#x4E49;&#xFF1A;" class="headerlink" title="&#x8DEF;&#x7531;&#x5B9A;&#x4E49;&#xFF1A;"></a>&#x8DEF;&#x7531;&#x5B9A;&#x4E49;&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//&#x4E0A;&#x62A5;&#x7B56;&#x7565;&#x4FEE;&#x6539;</span><br><span class="line">  .state(<span class="string">&apos;app.point.report.modify&apos;</span>,{</span><br><span class="line">	  url:<span class="string">&apos;/modify&apos;</span>,</span><br><span class="line">	  params:{id:null},</span><br><span class="line">	  templateUrl:<span class="string">&apos;tpl/point.report.modify.html&apos;</span>,</span><br><span class="line">	  resolve:{</span><br><span class="line">		  deps:[<span class="string">&apos;$ocLazyLoad&apos;</span>,</span><br><span class="line">		        <span class="keyword">function</span>(<span class="variable">$ocLazyLoad</span>){</span><br><span class="line">			  		<span class="built_in">return</span> <span class="variable">$ocLazyLoad</span>.load(<span class="string">&apos;js/controllers/point.report.modify.js&apos;</span>);</span><br><span class="line">		  			}</span><br><span class="line">		        ]</span><br><span class="line">	  }</span><br><span class="line">  })</span><br></pre></td></tr></table></figure>
+<h3 id="&#x4F20;&#x9012;&#x53C2;&#x6570;&#xFF1A;"><a href="#&#x4F20;&#x9012;&#x53C2;&#x6570;&#xFF1A;" class="headerlink" title="&#x4F20;&#x9012;&#x53C2;&#x6570;&#xFF1A;"></a>&#x4F20;&#x9012;&#x53C2;&#x6570;&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$scope</span>.ok = <span class="function"><span class="title">function</span></span>(){</span><br><span class="line">  	<span class="variable">$state</span>.go(<span class="string">&apos;app.point.report.modify&apos;</span>,{id:id});</span><br><span class="line">   }</span><br></pre></td></tr></table></figure>
+<h3 id="&#x63A5;&#x6536;&#x53C2;&#x6570;&#xFF1A;"><a href="#&#x63A5;&#x6536;&#x53C2;&#x6570;&#xFF1A;" class="headerlink" title="&#x63A5;&#x6536;&#x53C2;&#x6570;&#xFF1A;"></a>&#x63A5;&#x6536;&#x53C2;&#x6570;&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$scope</span>.id = <span class="variable">$stateParams</span>.id;</span><br></pre></td></tr></table></figure>
+
                         
                     </div>
 
@@ -147,7 +153,7 @@
 
                     <div class="description post-description">
     <span class="post-description-item">
-        <time datetime="2018-03-11T06:15:21.000Z" itemprop="datePublished">2018-03-11</time>
+        <time datetime="2018-08-07T08:09:14.000Z" itemprop="datePublished">2018-08-07</time>
 
     </span>
     <span class="post-description-item">
@@ -164,23 +170,16 @@
             <div class="column nav-left">
                 
 
-                <a href="/2018/03/11/Angular中的路由传参/" class="ui tiny button">
-
-                    <i class="angle left icon"></i>
-                    
-                    Angular中的路由传参
-                    
-
-                </a>
+                <a class="ui tiny button disabled"><i class="angle left icon"></i>Previous</a>
 
                 
             </div>
             <div class="column nav-right">
                 
 
-                <a href="/2018/03/11/hello-world/" class="ui tiny button">
+                <a href="/2018/03/11/Angular中的路由传参/" class="ui tiny button">
                     
-                    Hello World
+                    Angular中的路由传参
                     
                     <i class="angle right icon"></i></a>
                 
@@ -197,7 +196,7 @@
 
                 <div class="ui sticky article-toc" id="article-toc">
                     <!-- toc -->
-                    
+                    <ol class="ui ordered list"><li><a href="#路由定义："><span>路由定义：</span></a></li><li><a href="#传递参数："><span>传递参数：</span></a></li><li><a href="#接收参数："><span>接收参数：</span></a></li></ol>
                 </div>
 
             </div>

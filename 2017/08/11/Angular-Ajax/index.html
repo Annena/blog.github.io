@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html lang="">
+<head prefix="og: http://ogp.me/ns#">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <title>angular中的请求以及错误的提示 | Lina&#39;s blog</title>
+
+    <!-- Open Graph -->
+    <meta name="description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular中的请求以及错误的提示">
+<meta property="og:url" content="http://yoursite.com/2017/08/11/Angular-Ajax/index.html">
+<meta property="og:site_name" content="Lina&#39;s blog">
+<meta property="og:description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
+<meta property="og:updated_time" content="2018-03-11T07:55:44.097Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular中的请求以及错误的提示">
+<meta name="twitter:description" content="&amp;#x7B2C;&amp;#x4E00;&amp;#x79CD;(Angular&amp;#x4E2D;&amp;#x7684;$http,$http&amp;#x65E0;&amp;#x6CD5;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E3A;&amp;#x540C;&amp;#x6B65;)&amp;#xFF1A;123456789101112131415$http({method:&amp;quot;put&amp;quot;,			url:url + &amp;quot;/workg">
+
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "email": "mailto:",
+  "image": "",
+  "name": "Lina",
+  "url": "http://yoursite.com"
+}
+</script>
+    <script>
+    var algoliaEnabled = false;
+    
+</script>
+
+    
+
+    
+    
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    
+    
+    
+        <!-- stylesheets list from config.yml -->
+        
+        <link rel="stylesheet" href="/css/aloha.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.css">
+        
+        <link rel="stylesheet" href="//cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        
+    
+
+</head>
+<body id="body" style="margin-bottom: 0;" class="pushable">
+
+    <div class="ui top fixed menu">
+        <a class="item" id="menu-icon"><i class="sidebar icon"></i></a>
+    </div>
+
+    <div id="menu-sidebar" class="ui left vertical sidebar menu">
+
+    <div id="sidebar-top">
+        <div class="content">
+            <h3>Lina&#39;s blog</h3>
+        </div>
+    </div>
+    <div class="ui container sidebar-card">
+    <div class="ui people shape content">
+        <div class="active side">
+            <div class="ui card">
+                <div class="image">
+                    <img class="ui medium bordered image" src="/images/avatar.jpg">
+                </div>
+                <div class="content">
+                    <a class="header">Lina</a>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                        
+                    </div>
+
+                </div>
+                <div class="extra content">
+                    <div class="ui list">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+    
+    
+
+    
+
+    
+    <a href="/index.html" class="item" >
+        <i class="home icon"></i>
+        HOME
+    </a>
+
+    
+
+    
+</div>
+
+    <div class="pusher body-content">
+        <div id="content" class="ui main container">
+            <!--<div class="ui one column grid">-->
+                <!--<div class="column">-->
+                    <!--<div class="ui main container">-->
+                        <div id="post-Angular-Ajax" class="ui main container article-type-post">
+
+    
+
+    <div class="ui divided grid">
+
+        <div class="two column row" id="article-content">
+
+            <div class="thirteen wide computer thirteen wide tablet sixteen wide mobile column">
+                
+
+<h1 class="ui header">
+    
+    angular中的请求以及错误的提示
+</h1>
+
+
+
+                <div class="article-inner">
+
+                    <div class="article-entry" itemprop="articleBody">
+                        
+                        <h3 id="&#x7B2C;&#x4E00;&#x79CD;-Angular&#x4E2D;&#x7684;-http-http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;-&#xFF1A;"><a href="#&#x7B2C;&#x4E00;&#x79CD;-Angular&#x4E2D;&#x7684;-http-http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E00;&#x79CD;(Angular&#x4E2D;&#x7684;$http,$http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;)&#xFF1A;"></a>&#x7B2C;&#x4E00;&#x79CD;(Angular&#x4E2D;&#x7684;$http,$http&#x65E0;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x540C;&#x6B65;)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$http</span>({method:<span class="string">&quot;put&quot;</span>,</span><br><span class="line">			url:url + <span class="string">&quot;/workgroups&quot;</span>,</span><br><span class="line">			contentType: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">			dataType:<span class="string">&quot;JSON&quot;</span>,</span><br><span class="line">                headers:{<span class="string">&apos;appId&apos;</span>:<span class="string">&apos;001&apos;</span>},</span><br><span class="line">                        data:JSON.stringify(data),</span><br><span class="line">                        async: <span class="literal">false</span>})</span><br><span class="line">	    .success(<span class="keyword">function</span>(data){</span><br><span class="line">	          alert(<span class="string">&quot;&#x4FEE;&#x6539;&#x6210;&#x529F;!&quot;</span>)</span><br><span class="line">	          <span class="variable">$state</span>.go(<span class="string">&quot;app.workgroup.workgroup&quot;</span>);</span><br><span class="line">		})</span><br><span class="line">	    .error(<span class="keyword">function</span>(data,e,dx){</span><br><span class="line">	        alert(dx(<span class="string">&quot;X-configApp-error&quot;</span>));</span><br><span class="line">	        <span class="built_in">return</span>;</span><br><span class="line">	    });</span><br></pre></td></tr></table></figure>
+<h3 id="&#x7B2C;&#x4E8C;&#x79CD;-Angular&#x4E2D;&#x7684;-http&#x76F4;&#x63A5;&#x52A0;get-&#xFF1A;"><a href="#&#x7B2C;&#x4E8C;&#x79CD;-Angular&#x4E2D;&#x7684;-http&#x76F4;&#x63A5;&#x52A0;get-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x79CD;(Angular&#x4E2D;&#x7684;$http&#x76F4;&#x63A5;&#x52A0;get)&#xFF1A;"></a>&#x7B2C;&#x4E8C;&#x79CD;(Angular&#x4E2D;&#x7684;$http&#x76F4;&#x63A5;&#x52A0;get)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####&#x4E00;&#x822C;&#x7528;&#x4E8E;&#x53EA;&#x8BF7;&#x6C42;&#x6570;&#x636E;&#x3001;&#x6216;&#x8005;&#x5220;&#x9664;&#x9700;&#x8981;&#x5411;&#x540E;&#x53F0;&#x4F20;&#x7684;&#x4E1C;&#x897F;&#x5F88;&#x5C11;&#x65F6;&#x4F7F;&#x7528;</span></span><br><span class="line"><span class="variable">$http</span>.get(url+<span class="string">&quot;/monitor-points?page=&quot;</span>+(page - 1)+<span class="string">&quot;&amp;size=&quot;</span>+pageSize+urlData).success(<span class="keyword">function</span> (largeLoad,status,dx) {</span><br><span class="line">                	<span class="variable">$scope</span>.totalServerItems = dx(<span class="string">&quot;X-Total-Count&quot;</span>);//&#x8FD4;&#x56DE;&#x8BB0;&#x5F55;&#x7684;&#x603B;&#x6570;</span><br><span class="line">                    data = largeLoad.filter(<span class="keyword">function</span>(item) {</span><br><span class="line">                        <span class="built_in">return</span> JSON.stringify(item).toLowerCase().indexOf(ft) != -1;</span><br><span class="line">                    });</span><br><span class="line">                    <span class="variable">$scope</span>.setPagingData(data,page,pageSize);</span><br><span class="line">                });</span><br><span class="line"><span class="variable">$http</span>.delete(url+<span class="string">&quot;/monitor-points/&quot;</span>+row.entity.id,)</span><br><span class="line">        	.success(<span class="function"><span class="title">function</span></span>(){</span><br><span class="line">        		alert(<span class="string">&quot;&#x5220;&#x9664;&#x6210;&#x529F;&#xFF01;&quot;</span>);</span><br><span class="line">        		<span class="variable">$state</span>.go(<span class="string">&quot;app.point.point&quot;</span>,{},{reload:<span class="literal">true</span>});</span><br><span class="line">        	}) </span><br><span class="line">        	.error(<span class="keyword">function</span>(data){</span><br><span class="line">        	 alert(data.message);</span><br><span class="line">        	});</span><br><span class="line">        var header = {<span class="string">&apos;appId&apos;</span>:<span class="string">&apos;001&apos;</span>};</span><br><span class="line">		<span class="variable">$http</span>.get(url+<span class="string">&quot;/monitor-points/&quot;</span>+modify_id,{headers:header})</span><br><span class="line">		.success(<span class="keyword">function</span>(data){</span><br><span class="line">			//&#x9ED8;&#x8BA4;&#x9009;&#x4E2D;&#x4F20;&#x8FC7;&#x6765;&#x7684;&#x503C;</span><br><span class="line">			<span class="variable">$scope</span>.point = data.entity.monitorPoint;</span><br><span class="line">			<span class="variable">$scope</span>.attrs=data.entity.attrs;</span><br><span class="line">			<span class="variable">$scope</span>.setWorkGroupById(<span class="variable">$scope</span>.point.workgroupId);</span><br><span class="line">			<span class="variable">$scope</span>.setGateWayById(<span class="variable">$scope</span>.point.gatewayId);</span><br><span class="line">//			console.log(data.gatewayTypeId);</span><br><span class="line">		}).error(<span class="keyword">function</span>(data){</span><br><span class="line">           alert(data.message);</span><br><span class="line">        });</span><br></pre></td></tr></table></figure>
+<h3 id="&#x7B2C;&#x4E09;&#x79CD;-JQ&#x7684;Ajax-&#xFF1A;"><a href="#&#x7B2C;&#x4E09;&#x79CD;-JQ&#x7684;Ajax-&#xFF1A;" class="headerlink" title="&#x7B2C;&#x4E09;&#x79CD;(JQ&#x7684;Ajax)&#xFF1A;"></a>&#x7B2C;&#x4E09;&#x79CD;(JQ&#x7684;Ajax)&#xFF1A;</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">$.ajax({</span><br><span class="line">        		url:url + <span class="string">&quot;/da-devices&quot;</span>,</span><br><span class="line">        		<span class="built_in">type</span>:<span class="string">&quot;POST&quot;</span>,</span><br><span class="line">        		data:JSON.stringify(data),</span><br><span class="line">        		contentType:<span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">        		async: <span class="literal">false</span></span><br><span class="line">        	}).success(<span class="keyword">function</span>(data){</span><br><span class="line">        		alert(<span class="string">&quot;&#x521B;&#x5EFA;&#x6210;&#x529F;&#xFF01;&#xFF01;&#xFF01;&#xFF01;&quot;</span>);</span><br><span class="line">        	}).error(<span class="keyword">function</span>(data){</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            });</span><br><span class="line"></span><br><span class="line">$.ajax({</span><br><span class="line">    			url:url+<span class="string">&apos;/da-devices&apos;</span>,</span><br><span class="line">    			<span class="built_in">type</span>:<span class="string">&quot;PUT&quot;</span>,</span><br><span class="line">    			data:JSON.stringify(<span class="variable">$scope</span>.tcpData),</span><br><span class="line">    			contentType:<span class="string">&apos;application/json&apos;</span>,</span><br><span class="line">    			async:<span class="literal">false</span></span><br><span class="line">    		}).success(<span class="keyword">function</span>(data){</span><br><span class="line">    			alert(<span class="string">&apos;&#x4FEE;&#x6539;&#x6210;&#x529F;!!!!&apos;</span>);</span><br><span class="line">    			<span class="variable">$state</span>.go(<span class="string">&apos;app.point.view.collector.list&apos;</span>);</span><br><span class="line">    		}).error(<span class="keyword">function</span>(data){</span><br><span class="line">                alert(data.responseJSON.message);                </span><br><span class="line">            })</span><br></pre></td></tr></table></figure>
+
+                        
+                    </div>
+
+                    
+                    
+                    
+
+                    <div class="description post-description">
+    <span class="post-description-item">
+        <time datetime="2017-08-10T16:00:00.000Z" itemprop="datePublished">2017-08-11</time>
+
+    </span>
+    <span class="post-description-item">
+        
+    </span>
+</div>
+
+                </div>
+                
+                <div id="pagination" class="nav-web ui text container pagination">
+
+    <div class="ui stackable two column divided grid container">
+        <div class="row">
+            <div class="column nav-left">
+                
+
+                <a href="/2017/08/11/Angular-controller/" class="ui tiny button">
+
+                    <i class="angle left icon"></i>
+                    
+                    Angular中父controller与子controller之间的传递
+                    
+
+                </a>
+
+                
+            </div>
+            <div class="column nav-right">
+                
+
+                <a href="/2017/08/05/IP与Mac的正则/" class="ui tiny button">
+                    
+                    IP与Mac的正则
+                    
+                    <i class="angle right icon"></i></a>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+                
+            </div>
+
+            
+            <div class="three wide computer three wide tablet column">
+
+                <div class="ui sticky article-toc" id="article-toc">
+                    <!-- toc -->
+                    <ol class="ui ordered list"><li><a href="#第一种-Angular中的-http-http无法设置为同步-："><span>第一种(Angular中的$http,$http无法设置为同步)：</span></a></li><li><a href="#第二种-Angular中的-http直接加get-："><span>第二种(Angular中的$http直接加get)：</span></a></li><li><a href="#第三种-JQ的Ajax-："><span>第三种(JQ的Ajax)：</span></a></li></ol>
+                </div>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+        <div class="ui inverted section divider"></div>
+        &copy; 2018 <a href="/">Lina</a>,
+        Powered by <a href="https://github.com/henryhuang/hexo-theme-aloha" target="_blank">Aloha</a> and <a
+                href="http://hexo.io/" target="_blank">Hexo</a>.
+    </div>
+</div>
+
+    </div>
+
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+
+<script src="//cdn.bootcss.com/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch/3.18.1/algoliasearch.min.js"></script>
+
+<script src="//cdn.bootcss.com/algoliasearch-helper-js/2.13.0/algoliasearch.helper.min.js"></script>
+
+<script src="/js/semantic-ui-algolia.js"></script>
+
+<script src="/js/aloha-events.js"></script>
+
+
+
+</body>
+</html>
