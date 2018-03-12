@@ -8,7 +8,7 @@
 
 <title>
   
-    Archive
+    彙整
   
 </title>
 
@@ -78,22 +78,22 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">類別</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
+                <a href="javascript:;">標籤</a>
                 
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">10</span></li></ul>
+                <a href="javascript:;">彙整</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">11</span></li></ul>
               </li>
             
           
@@ -150,16 +150,16 @@
 
     <div class="post-list-item article">
       <h3 class="article-header">
-        <a href="/2018/12/06/JQ遍历数据，并放到页面上/" >
-  JQ遍历数据，并放到页面上
+        <a href="/2018/03/08/MVVM/" >
+  MVVM
 </a>
 
       </h3>
       
 
       <div class="article-info">
-        <a href="/2018/12/06/JQ遍历数据，并放到页面上/"><span class="article-date">
-  2018-12-06
+        <a href="/2018/03/08/MVVM/"><span class="article-date">
+  2018-03-08
 </span>
 </a>
         
@@ -169,7 +169,7 @@
       </div>
       <div class="article-entry">
         
-          <h3 id="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"><a href="#JQ遍历从后台获取的数据，并且在js中组合，放进页面中" class="headerlink" title="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"></a>JQ遍历从后台获取的数据，并且在js中组合，放进页面中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 显示店铺</span><br><span class="line">   shopList:<span class="keyword">function</span>(data)  &#123;</span><br><span class="line">       var content = <span class="string">'&lt;option value="all"&gt;全部&lt;/option&gt;'</span>;</span><br><span class="line">       <span class="keyword">for</span> (var i <span class="keyword">in</span> data) &#123;</span><br><span class="line">           content += <span class="string">'&lt;option value="'</span>+data[i].shop_id+<span class="string">'"&gt;'</span>+data[i].shop_name+<span class="string">'&lt;/option&gt;'</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       // 添加到页面中</span><br><span class="line">       $(<span class="string">'#shopList'</span>).html(content);</span><br><span class="line">       // ($(<span class="string">'#shopList option:selected'</span>))</span><br><span class="line">       <span class="keyword">if</span>($.cookie(<span class="string">'shopListcookie'</span>) != undefined)&#123;</span><br><span class="line">		$(<span class="string">'#shopList'</span>).val($.cookie(<span class="string">'shopListcookie'</span>))</span><br><span class="line">	&#125;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="什么是MVVM"><a href="#什么是MVVM" class="headerlink" title="什么是MVVM"></a>什么是MVVM</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Model     -- Plain Javascript Object</span><br><span class="line">ViewModel -- 是一个明确的实例，对于Dom发生改变来说，是DOM Listeners、对于Model发生</span><br><span class="line">改变来说是触发Directives </span><br><span class="line">View      -- Dom</span><br></pre></td></tr></table></figure>
 
         
       </div>
@@ -286,6 +286,40 @@ $(<span class="string">'.right .tabDel'</span>).unbind(<span class="string">'cli
       <div class="article-entry">
         
           <h3 id="比如获得name为…的input元素"><a href="#比如获得name为…的input元素" class="headerlink" title="比如获得name为…的input元素"></a>比如获得name为…的input元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 判断菜品库门店添加价格策略中的选择框</span><br><span class="line">	$(<span class="string">'input[name="pricedate"]'</span>).each(<span class="function"><span class="title">function</span></span>()&#123;		    		</span><br><span class="line">		$(this).unbind(<span class="string">'click'</span>).<span class="built_in">bind</span>(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">			clickradio($(this).val(),$(<span class="string">'.second-width'</span>));    	</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+
+  
+  
+    
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/12/06/JQ遍历数据，并放到页面上/" >
+  JQ遍历数据，并放到页面上
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/12/06/JQ遍历数据，并放到页面上/"><span class="article-date">
+  2017-12-06
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"><a href="#JQ遍历从后台获取的数据，并且在js中组合，放进页面中" class="headerlink" title="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"></a>JQ遍历从后台获取的数据，并且在js中组合，放进页面中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 显示店铺</span><br><span class="line">   shopList:<span class="keyword">function</span>(data)  &#123;</span><br><span class="line">       var content = <span class="string">'&lt;option value="all"&gt;全部&lt;/option&gt;'</span>;</span><br><span class="line">       <span class="keyword">for</span> (var i <span class="keyword">in</span> data) &#123;</span><br><span class="line">           content += <span class="string">'&lt;option value="'</span>+data[i].shop_id+<span class="string">'"&gt;'</span>+data[i].shop_name+<span class="string">'&lt;/option&gt;'</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       // 添加到页面中</span><br><span class="line">       $(<span class="string">'#shopList'</span>).html(content);</span><br><span class="line">       // ($(<span class="string">'#shopList option:selected'</span>))</span><br><span class="line">       <span class="keyword">if</span>($.cookie(<span class="string">'shopListcookie'</span>) != undefined)&#123;</span><br><span class="line">		$(<span class="string">'#shopList'</span>).val($.cookie(<span class="string">'shopListcookie'</span>))</span><br><span class="line">	&#125;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
         
       </div>
@@ -472,45 +506,10 @@ $(<span class="string">'.right .tabDel'</span>).unbind(<span class="string">'cli
 
   
 
-  
-  
-    
-  
-
-    <div class="post-list-item article">
-      <h3 class="article-header">
-        <a href="/2017/06/11/Angular中的路由传参/" >
-  Angular中的路由传参
-</a>
-
-      </h3>
-      
-
-      <div class="article-info">
-        <a href="/2017/06/11/Angular中的路由传参/"><span class="article-date">
-  2017-06-11
-</span>
-</a>
-        
-
-        
-
-      </div>
-      <div class="article-entry">
-        
-          <h3 id="IP的正则："><a href="#IP的正则：" class="headerlink" title="IP的正则："></a>IP的正则：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的IP地址</span><br><span class="line"><span class="variable">$scope</span>.gatewayIp = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|[1-9])\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."</span></span><br><span class="line">       		+<span class="string">"(1\\d&#123;2&#125;|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.ip))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.ip === undefined || <span class="variable">$scope</span>.gateway.ip === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isIpShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="第二种-Angular中的-http直接加get-："><a href="#第二种-Angular中的-http直接加get-：" class="headerlink" title="第二种(Angular中的$http直接加get)："></a>第二种(Angular中的$http直接加get)：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//判断所输入的Mac地址	</span><br><span class="line"><span class="variable">$scope</span>.getewayMac = <span class="function"><span class="title">function</span></span>()&#123;</span><br><span class="line">	var strRegex=new RegExp(<span class="string">"^([0-9a-fA-F]&#123;2&#125;)(([/\s:-][0-9a-fA-F]&#123;2&#125;)&#123;5&#125;)$"</span>);</span><br><span class="line">       <span class="keyword">if</span>(strRegex.test(<span class="variable">$scope</span>.gateway.mac))&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable">$scope</span>.gateway.mac === undefined || <span class="variable">$scope</span>.gateway.mac === <span class="string">""</span>)&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">false</span>;</span><br><span class="line">       &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">       	<span class="variable">$scope</span>.isMacShow=<span class="literal">true</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-        
-      </div>
-    </div>
-
-  
-
 
 
   <div class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next</a>
+    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">下一頁</a>
   </div>
 
 

@@ -8,7 +8,7 @@
 
 <title>
   
-    Archive: 2017/12
+    彙整: 2017/12
   
 </title>
 
@@ -78,22 +78,22 @@
           
             
               <li class="category-list-container">
-                <a href="javascript:;">Category</a>
+                <a href="javascript:;">類別</a>
                 
               </li>
             
           
             
               <li class="tag-list-container">
-                <a href="javascript:;">Tag</a>
+                <a href="javascript:;">標籤</a>
                 
               </li>
             
           
             
               <li class="archive-list-container">
-                <a href="javascript:;">Archive</a>
-                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">10</span></li></ul>
+                <a href="javascript:;">彙整</a>
+                <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a><span class="archive-list-count">11</span></li></ul>
               </li>
             
           
@@ -170,6 +170,40 @@
       <div class="article-entry">
         
           <h3 id="比如获得name为…的input元素"><a href="#比如获得name为…的input元素" class="headerlink" title="比如获得name为…的input元素"></a>比如获得name为…的input元素</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 判断菜品库门店添加价格策略中的选择框</span><br><span class="line">	$(<span class="string">'input[name="pricedate"]'</span>).each(<span class="function"><span class="title">function</span></span>()&#123;		    		</span><br><span class="line">		$(this).unbind(<span class="string">'click'</span>).<span class="built_in">bind</span>(<span class="string">'click'</span>, <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">			clickradio($(this).val(),$(<span class="string">'.second-width'</span>));    	</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+
+        
+      </div>
+    </div>
+
+  
+
+  
+  
+    
+  
+
+    <div class="post-list-item article">
+      <h3 class="article-header">
+        <a href="/2017/12/06/JQ遍历数据，并放到页面上/" >
+  JQ遍历数据，并放到页面上
+</a>
+
+      </h3>
+      
+
+      <div class="article-info">
+        <a href="/2017/12/06/JQ遍历数据，并放到页面上/"><span class="article-date">
+  2017-12-06
+</span>
+</a>
+        
+
+        
+
+      </div>
+      <div class="article-entry">
+        
+          <h3 id="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"><a href="#JQ遍历从后台获取的数据，并且在js中组合，放进页面中" class="headerlink" title="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"></a>JQ遍历从后台获取的数据，并且在js中组合，放进页面中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 显示店铺</span><br><span class="line">   shopList:<span class="keyword">function</span>(data)  &#123;</span><br><span class="line">       var content = <span class="string">'&lt;option value="all"&gt;全部&lt;/option&gt;'</span>;</span><br><span class="line">       <span class="keyword">for</span> (var i <span class="keyword">in</span> data) &#123;</span><br><span class="line">           content += <span class="string">'&lt;option value="'</span>+data[i].shop_id+<span class="string">'"&gt;'</span>+data[i].shop_name+<span class="string">'&lt;/option&gt;'</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       // 添加到页面中</span><br><span class="line">       $(<span class="string">'#shopList'</span>).html(content);</span><br><span class="line">       // ($(<span class="string">'#shopList option:selected'</span>))</span><br><span class="line">       <span class="keyword">if</span>($.cookie(<span class="string">'shopListcookie'</span>) != undefined)&#123;</span><br><span class="line">		$(<span class="string">'#shopList'</span>).val($.cookie(<span class="string">'shopListcookie'</span>))</span><br><span class="line">	&#125;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
         
       </div>

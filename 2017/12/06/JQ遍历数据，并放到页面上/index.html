@@ -8,20 +8,20 @@
 
 <title>
   
-    JQ中的extend函数
+    JQ遍历数据，并放到页面上
   
 </title>
 
-<meta name="description" content="extend对象合并12345678910// Jquery的扩展方法extend是我们在写插件的过程中常用的方法，该方法有一些重载原型// 它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。// 如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：// var newSrc=$.extend(">
+<meta name="description" content="JQ遍历从后台获取的数据，并且在js中组合，放进页面中1234567891011121314// 显示店铺   shopList:function(data)  &amp;#123;       var content = &apos;&amp;lt;option value=&quot;all&quot;&amp;gt;全部&amp;lt;/option&amp;gt;&apos;;       for (var i in data) &amp;#123;           co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JQ中的extend函数">
-<meta property="og:url" content="http://yoursite.com/2018/01/08/JQ中的extend函数/index.html">
+<meta property="og:title" content="JQ遍历数据，并放到页面上">
+<meta property="og:url" content="http://yoursite.com/2017/12/06/JQ遍历数据，并放到页面上/index.html">
 <meta property="og:site_name" content="Lina&#39;s blog">
-<meta property="og:description" content="extend对象合并12345678910// Jquery的扩展方法extend是我们在写插件的过程中常用的方法，该方法有一些重载原型// 它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。// 如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：// var newSrc=$.extend(">
-<meta property="og:updated_time" content="2018-03-11T10:39:38.358Z">
+<meta property="og:description" content="JQ遍历从后台获取的数据，并且在js中组合，放进页面中1234567891011121314// 显示店铺   shopList:function(data)  &amp;#123;       var content = &apos;&amp;lt;option value=&quot;all&quot;&amp;gt;全部&amp;lt;/option&amp;gt;&apos;;       for (var i in data) &amp;#123;           co">
+<meta property="og:updated_time" content="2018-03-11T10:43:01.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JQ中的extend函数">
-<meta name="twitter:description" content="extend对象合并12345678910// Jquery的扩展方法extend是我们在写插件的过程中常用的方法，该方法有一些重载原型// 它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。// 如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：// var newSrc=$.extend(">
+<meta name="twitter:title" content="JQ遍历数据，并放到页面上">
+<meta name="twitter:description" content="JQ遍历从后台获取的数据，并且在js中组合，放进页面中1234567891011121314// 显示店铺   shopList:function(data)  &amp;#123;       var content = &apos;&amp;lt;option value=&quot;all&quot;&amp;gt;全部&amp;lt;/option&amp;gt;&apos;;       for (var i in data) &amp;#123;           co">
 
 
   <link rel="alternative" href="/atom.xml" title="Lina&#39;s blog" type="application/atom+xml">
@@ -137,17 +137,17 @@
       
         <div style="max-width: 1000px">
       
-          <article id="post-JQ中的extend函数" class="article article-type-post">
+          <article id="post-JQ遍历数据，并放到页面上" class="article article-type-post">
   
     <h1 class="article-header">
-      JQ中的extend函数
+      JQ遍历数据，并放到页面上
     </h1>
   
   
 
   <div class="article-info">
     <span class="article-date">
-  2018-01-08
+  2017-12-06
 </span>
 
     
@@ -156,7 +156,7 @@
 
   </div>
   <div class="article-entry">
-    <h3 id="extend对象合并"><a href="#extend对象合并" class="headerlink" title="extend对象合并"></a>extend对象合并</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// Jquery的扩展方法extend是我们在写插件的过程中常用的方法，该方法有一些重载原型</span><br><span class="line">// 它的含义是将src1,src2,src3...合并到dest中,返回值为合并后的dest,由此可以看出该方法合并后，是修改了dest的结构的。</span><br><span class="line">// 如果想要得到合并的结果却又不想修改dest的结构，可以如下使用：</span><br><span class="line">// var newSrc=$.extend(&#123;&#125;,src1,src2,src3...)</span><br><span class="line">// 也就是将<span class="string">"&#123;&#125;"</span>作为dest参数。这样就可以将src1,src2,src3...进行合并，然后将合并结果返回给newSrc了。</span><br><span class="line">// 如下例：var result=$.extend(&#123;&#125;,&#123;name:<span class="string">"Tom"</span>,age:21&#125;,&#123;name:<span class="string">"Jerry"</span>,sex:<span class="string">"Boy"</span>&#125;)</span><br><span class="line">// 那么合并后的结果result=&#123;name:<span class="string">"Jerry"</span>,age:21,sex:<span class="string">"Boy"</span>&#125;</span><br><span class="line">// 也就是说后面的参数如果和前面的参数存在相同的名称，那么后面的会覆盖前面的参数值。</span><br><span class="line"></span><br><span class="line">var dataAjax = $.extend(&#123;&#125;, page, data);</span><br></pre></td></tr></table></figure>
+    <h3 id="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"><a href="#JQ遍历从后台获取的数据，并且在js中组合，放进页面中" class="headerlink" title="JQ遍历从后台获取的数据，并且在js中组合，放进页面中"></a>JQ遍历从后台获取的数据，并且在js中组合，放进页面中</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 显示店铺</span><br><span class="line">   shopList:<span class="keyword">function</span>(data)  &#123;</span><br><span class="line">       var content = <span class="string">'&lt;option value="all"&gt;全部&lt;/option&gt;'</span>;</span><br><span class="line">       <span class="keyword">for</span> (var i <span class="keyword">in</span> data) &#123;</span><br><span class="line">           content += <span class="string">'&lt;option value="'</span>+data[i].shop_id+<span class="string">'"&gt;'</span>+data[i].shop_name+<span class="string">'&lt;/option&gt;'</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       // 添加到页面中</span><br><span class="line">       $(<span class="string">'#shopList'</span>).html(content);</span><br><span class="line">       // ($(<span class="string">'#shopList option:selected'</span>))</span><br><span class="line">       <span class="keyword">if</span>($.cookie(<span class="string">'shopListcookie'</span>) != undefined)&#123;</span><br><span class="line">		$(<span class="string">'#shopList'</span>).val($.cookie(<span class="string">'shopListcookie'</span>))</span><br><span class="line">	&#125;</span><br><span class="line">      </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
   </div>
   <footer class="article-footer">
